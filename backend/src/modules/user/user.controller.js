@@ -1,9 +1,10 @@
 const { encryptPassword, comparePassword } = require('../../plugins/bcrypt');
 const userModel= require('./user.schema');
+const userdetailsModel= require('./userdetails.schema');
 const SECRET_KEY = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 const userRegister = async (req,res) => {
-    const {username, password}= req.body;
+    const {firstname, lastname, username, email, password}= req.body;
     const user = await userModel.findOne({
         username
     });
