@@ -1,4 +1,4 @@
-const { encryptPassword, comparePassword } = require('../../plugins/bcrypt');
+// const { encryptPassword, comparePassword } = require('../../plugins/bcrypt');
 const userModel= require('./user.schema');
 const userdetailsModel= require('./userdetails.schema');
 const SECRET_KEY = require('../../config/keys');
