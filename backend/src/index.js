@@ -6,7 +6,7 @@ const router = express.Router();
 // const axios = require('axios')
 const cors = require('cors');
 // const userRoutes = require('./modules/user/user.routes');
-// const todoRoutes = require('./modules/todo/todo.routes');
+const blogRoutes = require('./modules/blog/blog.routes');
 // const todoController = require('./modules/todo/todo.controller')
 app.listen(8001, () => {
     console.log(`API is listening on port 8001`);
@@ -18,7 +18,7 @@ app.use(cors({
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-// app.use('/todo',todoRoutes)
+app.use('/blog',blogRoutes)
 // app.use('/user',userRoutes)
 
 mongoose.connect("mongodb+srv://admin:admin@cluster0.9okskgq.mongodb.net/");

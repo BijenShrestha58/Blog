@@ -14,3 +14,14 @@ const createBlog = async(req, res)=>{
     });
     res.status(200).send("Blog Created")
 }
+
+const deleteBlog=async(req,res)=>{
+
+}
+
+module.exports = {
+getAllBlog,
+createBlog,
+deleteBlog
+}
+
