@@ -14,3 +14,7 @@ const createBlog = async(req, res)=>{
     });
     res.status(200).send("Blog Created")
 }
+module.exports = {
+    getAllBlog,
+    createBlog,
+}
