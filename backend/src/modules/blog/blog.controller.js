@@ -52,7 +52,7 @@ const deleteBlog = async(req,res)=>{
 }
 
 const editBlog = async(req,res)=>{
-    const blogId=req.params._id;
+    const blogId=req.params.id;
     const updatedBlog={
         title:req.body.title,
         content:req.body.content
@@ -68,12 +68,14 @@ const createBlogtype = async(req, res)=>{
     res.status(200).send("New Blogtype Created")
 }
 
-
-
 const getBlogsByBlogTypeId = async(req, res)=>{
     await blogSchema.find({
-        blogtypes: { $elemMatch: { $eq: req.params.id } } 
+        blogtypes: { 
+            $elemMatch: 
+            { $eq: req.params.id } 
+        } 
     });
+
     res.status(200).send("New Blogtype Created")
 }
 
@@ -84,9 +86,9 @@ getAllBlog,
 getById,
 getByUser,
 createBlog,
+getBlogsByBlogTypeId,
 deleteBlog,
 editBlog,
 createBlogtype,
-getBlogsByBlogTypeId
 }
 

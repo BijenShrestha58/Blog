@@ -12,9 +12,17 @@ const userSchema = new mongoose.Schema({
     email: {
         required :true,
         type: String
+    },
+    status: {
+        required :true,
+        type: String,
+        default: 'active'
+    },
+    role: {
+        required :true,
+        type: String,
+        default: 'user'
     }
-
-    
 },{
     timestamps:true
 })
