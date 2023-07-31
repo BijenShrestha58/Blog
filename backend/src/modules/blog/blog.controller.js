@@ -21,7 +21,7 @@ const createBlog = async(req, res)=>{
 }
 
 const deleteBlog = async(req,res)=>{
-    const blogId= req.params._id;
+    const blogId= req.params.id;
     await blogSchema.findByIdAndDelete(blogId);
     res.status(200).send("Blog Deleted")
 }
