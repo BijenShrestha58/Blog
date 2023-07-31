@@ -1,5 +1,6 @@
 const userSchema = require('../user/user.schema');
 const blogSchema= require('./blog.schema');
+const blogtypeschema = require('./blogtypes.schema');
 
 const getAllBlog=async(req,res)=>{
     return res.send({
@@ -27,7 +28,8 @@ const createBlog = async(req, res)=>{
     await blogSchema.create({
         title:req.body.title,
         content:req.body.content,
-        user: req.body.user
+        user: req.body.user,
+        blogtypes: req.body.blogtypes
     });
     res.status(200).send("Blog Created")
 }
@@ -48,6 +50,12 @@ const editBlog = async(req,res)=>{
     res.status(200).send("Blog Updated")
 }
 
+const createBlogtype = async(req, res)=>{
+    await blogtypeschema.create({
+        name:req.body.name,
+    });
+    res.status(200).send("New Blogtype Created")
+}
 
 
 
@@ -57,6 +65,7 @@ getById,
 getByUser,
 createBlog,
 deleteBlog,
-editBlog
+editBlog,
+createBlogtype
 }
 

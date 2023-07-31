@@ -3,6 +3,7 @@ const blogController = require('./blog.controller');
 const blogRoutes = express.Router();
 
 blogRoutes.get('/user/:username', blogController.getByUser);
+blogRoutes.post('/blogtypes', blogController.createBlogtype);
 
 blogRoutes.get('/',blogController.getAllBlog);
 blogRoutes.get('/:id', blogController.getById);

@@ -5,7 +5,8 @@ const SECRET_KEY = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 
 const userRegister = async (req,res) => {
-    const {firstname, lastname, email,username, password}= req.body;
+    const { firstname, lastname, email, username, password } = req.body;
+
     const user = await userModel.findOne({
         username
     });
@@ -18,16 +19,17 @@ const userRegister = async (req,res) => {
         const encryptedPassword =await encryptPassword(password)
         const newUser = new userModel({
             username,
-            password:encryptedPassword
+            email,
+            password:encryptedPassword,
           });
         await newUser.save();
 
         const userDetails = new userdetailsModel({
-            user: newUser._id, 
-            firstname,
-            lastname,
-            email
+            user: newUser._id,
+            firstName: firstname,
+            lastName: lastname,
           });
+    
         await userDetails.save();
         return res.status(401).send({
             data: null,
