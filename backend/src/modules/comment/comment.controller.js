@@ -42,6 +42,7 @@ const createComment = async(req, res)=>{
 
 const deleteComment = async(req,res)=>{
     const commentId= req.params.id;
+    await commentSchema.deleteMany({parentId: commentId});
     await commentSchema.findByIdAndDelete(commentId);
     res.status(200).send("Comment Deleted")
 }
