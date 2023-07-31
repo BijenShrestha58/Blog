@@ -13,6 +13,11 @@ const commentSchema= new mongoose.Schema({
         required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    blog:{
+        required:true,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Blog'
     }
 },{
     timestamps:true
