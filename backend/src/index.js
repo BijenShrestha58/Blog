@@ -7,6 +7,7 @@ const router = express.Router();
 const cors = require('cors');
 const blogRoutes = require('./modules/blog/blog.routes');
 const userRoutes = require('./modules/user/user.routes');
+const commentRoutes = require('./modules/comment/comment.routes');
 
 // const todoController = require('./modules/todo/todo.controller')
 app.listen(8001, () => {
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 // app.use('/todo',todoRoutes)
 app.use('/user',userRoutes)
 app.use('/blog',blogRoutes)
+app.use('/comment',commentRoutes)
 
 mongoose.connect("mongodb+srv://admin:admin@cluster0.9okskgq.mongodb.net/");
 const database = mongoose.connection; 

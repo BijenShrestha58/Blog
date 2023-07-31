@@ -3,8 +3,7 @@ const mongoose= require('mongoose');
 const commentSchema= new mongoose.Schema({
     parentId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Comment'
-        
+        ref:'Comment'        
     },
     content:{
         required:true,
@@ -14,6 +13,11 @@ const commentSchema= new mongoose.Schema({
         required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    blog:{
+        required:true,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Blog'
     }
 },{
     timestamps:true
