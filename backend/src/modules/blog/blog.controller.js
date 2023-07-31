@@ -2,12 +2,12 @@ const blogSchema= require('./blog.schema');
 
 const getAllBlog=async(req,res)=>{
     return res.send({
-        data: await blogSchema.find({}).populate('User','username _id')
+        data: await blogSchema.find({}).populate('user','username _id')
     })
 }
 const getById = async(req,res)=>{
     return res.send({
-        data:await blogSchema.find({_id: req.params.id}).populate('User','username _id')
+        data:await blogSchema.find({_id: req.params.id}).populate('user','username _id')
     })
 }
 

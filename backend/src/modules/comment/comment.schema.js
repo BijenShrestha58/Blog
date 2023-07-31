@@ -3,8 +3,7 @@ const mongoose= require('mongoose');
 const commentSchema= new mongoose.Schema({
     parentId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Comment'
-        
+        ref:'Comment'        
     },
     content:{
         required:true,

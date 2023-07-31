@@ -4,7 +4,7 @@ const blogRoutes = express.Router();
 
 blogRoutes.get('/',blogController.getAllBlog);
 blogRoutes.get('/:id', blogController.getById);
-blogRoutes.post('', blogController.createBlog);
+blogRoutes.post('/', blogController.createBlog);
 blogRoutes.put('/:id', blogController.editBlog);
 blogRoutes.delete('/:id', blogController.deleteBlog);
 

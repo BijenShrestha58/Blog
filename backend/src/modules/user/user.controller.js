@@ -1,10 +1,9 @@
 const { encryptPassword, comparePassword } = require('../../plugins/bcrypt');
 const userModel= require('./user.schema');
-const userdetailsModel= require('./userdetails.schema');
 const SECRET_KEY = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 const userRegister = async (req,res) => {
-    const {firstname, lastname, email,username, password}= req.body;
+    const {username, password}= req.body;
     const user = await userModel.findOne({
         username
     });
@@ -15,19 +14,9 @@ const userRegister = async (req,res) => {
         })
     }else{
         const encryptedPassword =await encryptPassword(password)
-        const newUser = new userModel({
-            username,
-            password:encryptedPassword
-          });
-        await newUser.save();
-
-        const userDetails = new userdetailsModel({
-            user: newUser._id, 
-            firstname,
-            lastname,
-            email
-          });
-        await userDetails.save();
+        await userModel.create({
+            username,password :encryptedPassword
+        })
         return res.status(401).send({
             data: null,
             message: 'User created successfully'
@@ -57,7 +46,7 @@ const userLogin = async (request, response, next) => {
 }
 
 const createToken = (user) => {
-    const expiresIn = 60 * 60 * 60; // an hour
+    const expiresIn = 60 * 60; // an hour
     const secret = SECRET_KEY;
     const dataStoredInToken = {
         _id: user._id,
