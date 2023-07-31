@@ -2,6 +2,8 @@ const express = require('express');
 const blogController = require('./blog.controller');
 const blogRoutes = express.Router();
 
+blogRoutes.get('/user/:username', blogController.getByUser);
+
 blogRoutes.get('/',blogController.getAllBlog);
 blogRoutes.get('/:id', blogController.getById);
 blogRoutes.post('', blogController.createBlog);
