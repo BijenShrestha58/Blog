@@ -5,6 +5,11 @@ const getAllBlog=async(req,res)=>{
         data: await blogSchema.find({}).populate('User','username _id')
     })
 }
+const getById = async(req,res)=>{
+    return res.send({
+        data:await blogSchema.find({_id: req.params.id}).populate('User','username _id')
+    })
+}
 
 const createBlog = async(req, res)=>{
     await blogSchema.create({
@@ -15,13 +20,27 @@ const createBlog = async(req, res)=>{
     res.status(200).send("Blog Created")
 }
 
-const deleteBlog=async(req,res)=>{
+const deleteBlog = async(req,res)=>{
+    const blogId= req.params._id;
+    await blogSchema.findByIdAndDelete(blogId);
+    res.status(200).send("Blog Deleted")
+}
 
+const editBlog = async(req,res)=>{
+    const blogId=req.params._id;
+    const updatedBlog={
+        title:req.body.title,
+        content:req.body.content
+    }
+    await blogSchema.findByIdAndUpdate(blogId,updatedBlog);
+    res.status(200).send("Blog Updated")
 }
 
 module.exports = {
 getAllBlog,
+getById,
 createBlog,
-deleteBlog
+deleteBlog,
+editBlog
 }
 
