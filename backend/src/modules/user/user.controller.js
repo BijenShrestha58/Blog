@@ -1,9 +1,12 @@
 const { encryptPassword, comparePassword } = require('../../plugins/bcrypt');
 const userModel= require('./user.schema');
+const userdetailsModel = require('./userdetails.schema');
 const SECRET_KEY = require('../../config/keys');
 const jwt = require('jsonwebtoken');
+
 const userRegister = async (req,res) => {
-    const {username, password}= req.body;
+    const { firstname, lastname, email, username, password } = req.body;
+
     const user = await userModel.findOne({
         username
     });
@@ -14,9 +17,20 @@ const userRegister = async (req,res) => {
         })
     }else{
         const encryptedPassword =await encryptPassword(password)
-        await userModel.create({
-            username,password :encryptedPassword
-        })
+        const newUser = new userModel({
+            username,
+            email,
+            password:encryptedPassword,
+          });
+        await newUser.save();
+
+        const userDetails = new userdetailsModel({
+            user: newUser._id,
+            firstName: firstname,
+            lastName: lastname,
+          });
+    
+        await userDetails.save();
         return res.status(401).send({
             data: null,
             message: 'User created successfully'
@@ -46,7 +60,7 @@ const userLogin = async (request, response, next) => {
 }
 
 const createToken = (user) => {
-    const expiresIn = 60 * 60 * 60; // an hour
+    const expiresIn = 60 * 60; // an hour
     const secret = SECRET_KEY;
     const dataStoredInToken = {
         _id: user._id,
@@ -58,8 +72,18 @@ const createToken = (user) => {
     };
 }
 
+const getAllUsers = async (req,res) => {
+    try {
+        const users = await userModel.find({}, '-password');
+        const userDetails = await userdetailsModel.find({});
+        return res.status(200).json({ users, userDetails });
+      } catch (error) {
+        return res.status(500).json({ message: 'Error fetching users and details' });
+      }
+}
 
 module.exports = {
     userLogin,
     userRegister,
+    getAllUsers
 }
