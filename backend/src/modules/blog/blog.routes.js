@@ -7,6 +7,7 @@ blogRoutes.post('/blogtypes', blogController.createBlogtype);
 
 blogRoutes.get('/',blogController.getAllBlog);
 blogRoutes.get('/type/:id',blogController.getBlogsByBlogTypeId);
+blogRoutes.get('/user-id/:id',blogController.getBlogsByUserId);
 blogRoutes.get('/:id', blogController.getById);
 blogRoutes.post('/', blogController.createBlog);
 blogRoutes.put('/:id', blogController.editBlog);
