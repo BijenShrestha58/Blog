@@ -57,12 +57,14 @@ const createBlogtype = async(req, res)=>{
     res.status(200).send("New Blogtype Created")
 }
 
-
-
 const getBlogsByBlogTypeId = async(req, res)=>{
     await blogSchema.find({
-        blogtypes: { $elemMatch: { $eq: req.params.id } } 
+        blogtypes: { 
+            $elemMatch: 
+            { $eq: req.params.id } 
+        } 
     });
+
     res.status(200).send("New Blogtype Created")
 }
 
@@ -73,9 +75,9 @@ getAllBlog,
 getById,
 getByUser,
 createBlog,
+getBlogsByBlogTypeId,
 deleteBlog,
 editBlog,
 createBlogtype,
-getBlogsByBlogTypeId
 }
 
