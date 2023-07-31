@@ -24,6 +24,17 @@ const getByUser = async(req,res)=>{
     })
 }
 
+const getBlogsByUserId = async(req,res)=>{
+    const username = req.params.id;
+    const user = await userSchema.findById(username);
+    if (!user) {
+        return res.status(404).send({ message: 'User not found' });
+    }
+    return res.send({
+        data:await blogSchema.find({user:username}).populate('user','username _id')
+    })
+}
+
 const createBlog = async(req, res)=>{
     await blogSchema.create({
         title:req.body.title,
