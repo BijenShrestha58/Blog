@@ -1,10 +1,10 @@
-// const { encryptPassword, comparePassword } = require('../../plugins/bcrypt');
+const { encryptPassword, comparePassword } = require('../../plugins/bcrypt');
 const userModel= require('./user.schema');
 const userdetailsModel= require('./userdetails.schema');
 const SECRET_KEY = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 const userRegister = async (req,res) => {
-    const {firstname, lastname, username, email, password}= req.body;
+    const {firstname, lastname, email,username, password}= req.body;
     const user = await userModel.findOne({
         username
     });
@@ -15,9 +15,19 @@ const userRegister = async (req,res) => {
         })
     }else{
         const encryptedPassword =await encryptPassword(password)
-        await userModel.create({
-            username,password :encryptedPassword
-        })
+        const newUser = new userModel({
+            username,
+            password:encryptedPassword
+          });
+        await newUser.save();
+
+        const userDetails = new userdetailsModel({
+            user: newUser._id, 
+            firstname,
+            lastname,
+            email
+          });
+        await userDetails.save();
         return res.status(401).send({
             data: null,
             message: 'User created successfully'
