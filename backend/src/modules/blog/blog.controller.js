@@ -11,6 +11,12 @@ const getById = async(req,res)=>{
     })
 }
 
+// const getByUser = async(req,res)=>{
+//     return res.send({
+//         data:await blogSchema.find({user._id: req.params.})
+//     })
+// }
+
 const createBlog = async(req, res)=>{
     await blogSchema.create({
         title:req.body.title,

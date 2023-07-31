@@ -58,8 +58,18 @@ const createToken = (user) => {
     };
 }
 
+const getAllUsers = async (req,res) => {
+    try {
+        const users = await userModel.find({}, '-password');
+        const userDetails = await userdetailsModel.find({});
+        return res.status(200).json({ users, userDetails });
+      } catch (error) {
+        return res.status(500).json({ message: 'Error fetching users and details' });
+      }
+}
 
 module.exports = {
     userLogin,
     userRegister,
+    getAllUsers
 }
