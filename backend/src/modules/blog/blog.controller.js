@@ -41,7 +41,7 @@ const deleteBlog = async(req,res)=>{
 }
 
 const editBlog = async(req,res)=>{
-    const blogId=req.params._id;
+    const blogId=req.params.id;
     const updatedBlog={
         title:req.body.title,
         content:req.body.content
