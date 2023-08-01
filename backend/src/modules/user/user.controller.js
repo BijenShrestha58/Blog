@@ -26,8 +26,8 @@ const userRegister = async (req,res) => {
 
         const userDetails = new userdetailsModel({
             user: newUser._id,
-            firstName: firstname,
-            lastName: lastname,
+            firstname: firstname,
+            lastname: lastname,
           });
     
         await userDetails.save();

@@ -14,6 +14,11 @@ const blogSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    status:{
+        required:true,
+        type: Number,
+        default: 1
+    },
     blogtypes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Blogtypes'
