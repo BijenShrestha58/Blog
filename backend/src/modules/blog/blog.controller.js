@@ -3,6 +3,7 @@ const blogSchema= require('./blog.schema');
 const blogtypeschema = require('./blogtypes.schema');
 
 const getAllBlog=async(req,res)=>{
+    console.log('hello')
     return res.send({
         data: await blogSchema.find({}).populate('user','username _id')
     })
