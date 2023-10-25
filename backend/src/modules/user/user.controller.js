@@ -7,7 +7,8 @@ const userSchema = require("./user.schema");
 const userdetailsSchema = require("./userdetails.schema");
 
 const userRegister = async (req, res) => {
-  const { firstname, lastname, gender, email, username, password } = req.body;
+  const { firstname, lastname, gender, dob, email, username, password } =
+    req.body;
 
   const user = await userModel.findOne({
     username,
@@ -31,6 +32,7 @@ const userRegister = async (req, res) => {
       firstname: firstname,
       lastname: lastname,
       gender: gender,
+      dob: dob,
     });
 
     await userDetails.save();
