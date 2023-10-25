@@ -3,9 +3,10 @@ const userModel = require("./user.schema");
 const userdetailsModel = require("./userdetails.schema");
 const SECRET_KEY = require("../../config/keys");
 const jwt = require("jsonwebtoken");
+const userSchema = require("./user.schema");
 
 const userRegister = async (req, res) => {
-  const { firstname, lastname, email, username, password } = req.body;
+  const { firstname, lastname, gender, email, username, password } = req.body;
 
   const user = await userModel.findOne({
     username,
@@ -28,6 +29,7 @@ const userRegister = async (req, res) => {
       user: newUser._id,
       firstname: firstname,
       lastname: lastname,
+      gender: gender,
     });
 
     await userDetails.save();
