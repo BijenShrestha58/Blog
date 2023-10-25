@@ -11,13 +11,19 @@ const userRegister = async (req, res) => {
     req.body;
 
   const user = await userModel.findOne({
-    username,
+    $or: [{ username }, { email }],
   });
 
   if (user) {
-    return res.status(400).send({
-      message: "User already exists",
-    });
+    if (user.username === username) {
+      return res.status(400).send({
+        message: "Username taken",
+      });
+    } else {
+      return res.status(400).send({
+        message: "Email already in use",
+      });
+    }
   } else {
     const encryptedPassword = await encryptPassword(password);
     const newUser = new userModel({
@@ -36,7 +42,7 @@ const userRegister = async (req, res) => {
     });
 
     await userDetails.save();
-    return res.status(401).send({
+    return res.status(201).send({
       data: null,
       message: "User created successfully",
     });
