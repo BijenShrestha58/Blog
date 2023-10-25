@@ -4,6 +4,7 @@ const userdetailsModel = require("./userdetails.schema");
 const SECRET_KEY = require("../../config/keys");
 const jwt = require("jsonwebtoken");
 const userSchema = require("./user.schema");
+const userdetailsSchema = require("./userdetails.schema");
 
 const userRegister = async (req, res) => {
   const { firstname, lastname, gender, email, username, password } = req.body;
@@ -93,8 +94,17 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const userId = req.params.id;
+  await userSchema.findByIdAndDelete(userId);
+  res.status(200).send("User deleted");
+  await userdetailsSchema.findByIdAndDelete(userId);
+  res.status(200).send("User deleted");
+};
+
 module.exports = {
   userLogin,
   userRegister,
   getAllUsers,
+  deleteUser,
 };
