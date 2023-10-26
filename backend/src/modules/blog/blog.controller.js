@@ -5,14 +5,18 @@ const blogtypesSchema = require("./blogtypes.schema");
 const getAllBlog = async (req, res) => {
   console.log("hello");
   return res.send({
-    data: await blogSchema.find({}).populate("user", "username _id"),
+    data: await blogSchema
+      .find({})
+      .populate("user", "username _id")
+      .populate("blogtypes", "name _id"),
   });
 };
 const getById = async (req, res) => {
   return res.send({
     data: await blogSchema
-      .find({ _id: req.params.id })
-      .populate("user", "username _id"),
+      .findOne({ _id: req.params.id })
+      .populate("user", "username _id")
+      .populate("blogtypes", "name _id"),
   });
 };
 
