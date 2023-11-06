@@ -82,6 +82,9 @@ const createToken = (user) => {
   const secret = SECRET_KEY;
   const dataStoredInToken = {
     _id: user._id,
+    username: user.username,
+    email: user.email,
+    role: user.role,
   };
   // @ts-ignore
   return {
@@ -110,9 +113,28 @@ const deleteUser = async (req, res) => {
   res.status(200).send("User deleted");
 };
 
+const getMyDetails = async (req, res) => {
+  console.log(req.user);
+  const userId = req.user._id;
+  const user = await userSchema.findById(userId).lean();
+
+  if (!user) {
+    return res.status(404).send({ message: "User not found" });
+  }
+
+  const userDetails = await userdetailsSchema.findOne({ user: req.user._id });
+  return res.send({
+    data: {
+      ...user,
+      userDetails: userDetails,
+    },
+  });
+};
+
 module.exports = {
   userLogin,
   userRegister,
   getAllUsers,
   deleteUser,
+  getMyDetails,
 };
