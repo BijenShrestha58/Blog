@@ -12,6 +12,7 @@ const getAllBlog = async (req, res) => {
   });
 };
 const getById = async (req, res) => {
+  console.log(req.user);
   return res.send({
     data: await blogSchema
       .findOne({ _id: req.params.id })
@@ -47,12 +48,14 @@ const getBlogsByUserId = async (req, res) => {
 };
 
 const createBlog = async (req, res) => {
-  await blogSchema.create({
+  console.log("asdasdasd");
+  const blog = await blogSchema.create({
     title: req.body.title,
     content: req.body.content,
     user: req.body.user,
     blogtypes: req.body.blogtypes,
   });
+  console.log(blog);
   res.status(200).send("Blog Created");
 };
 
