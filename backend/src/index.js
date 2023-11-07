@@ -14,14 +14,10 @@ app.listen(8001, () => {
   console.log(`API is listening on port 8001`);
 });
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 // app.use('/todo',todoRoutes)
 app.use("/user", userRoutes);
 app.use("/blog", blogRoutes);

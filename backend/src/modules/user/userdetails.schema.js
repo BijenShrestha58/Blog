@@ -19,6 +19,10 @@ const userdetailsSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
+    dob: {
+      required: true,
+      type: String,
+    },
   },
   {
     timestamps: true,
