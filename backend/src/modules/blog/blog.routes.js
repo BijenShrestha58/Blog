@@ -7,7 +7,7 @@ blogRoutes.put("/:id", blogController.editBlog);
 blogRoutes.delete("/:id", blogController.deleteBlog);
 
 blogRoutes.get("/user/:username", blogController.getByUser);
-blogRoutes.get("/:id", authMiddleWare, blogController.getById);
+// blogRoutes.get("/:id", blogController.getById);
 blogRoutes.post("/blogtypes", blogController.createBlogtype);
 blogRoutes.get("/blogtypes", blogController.getBlogTypes);
 
